@@ -1,3 +1,7 @@
+using System.Drawing.Imaging;
+using System.Runtime.Intrinsics.X86;
+using System.Text;
+
 namespace ImageCropper
 {
     public partial class FileChooser : Form
@@ -29,8 +33,37 @@ namespace ImageCropper
                 pictureBox.Image = imageCropper.CroppedImage;
                 string croppedFilename = "cropped_" + Path.GetFileName(textBox.Text);
                 croppedFilename = @"C:\Users\b45089\Pictures\Testbilder\Output\" + croppedFilename;
-                pictureBox.Image.Save(croppedFilename);
+                //pictureBox.Image.Save(croppedFilename, ImageFormat.Jpeg);
+
+                // Create an Encoder object based on the GUID  
+                // for the Quality parameter category.  
+                System.Drawing.Imaging.Encoder myEncoder = System.Drawing.Imaging.Encoder.Quality;
+
+                ImageCodecInfo jpgEncoder = GetEncoder(ImageFormat.Jpeg);
+
+                // Create an EncoderParameters object.  
+                // An EncoderParameters object has an array of EncoderParameter  
+                // objects. In this case, there is only one  
+                // EncoderParameter object in the array.  
+                EncoderParameters myEncoderParameters = new EncoderParameters(1);
+
+                var myEncoderParameter = new EncoderParameter(myEncoder, 100L);
+                myEncoderParameters.Param[0] = myEncoderParameter;
+                pictureBox.Image.Save(croppedFilename, jpgEncoder, myEncoderParameters);
             }
+        }
+
+        private ImageCodecInfo GetEncoder(ImageFormat format)
+        {
+            ImageCodecInfo[] codecs = ImageCodecInfo.GetImageEncoders();
+            foreach (ImageCodecInfo codec in codecs)
+            {
+                if (codec.FormatID == format.Guid)
+                {
+                    return codec;
+                }
+            }
+            return null;
         }
 
 
