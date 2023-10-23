@@ -20,7 +20,6 @@ C:\Users\b45089\code\winforms\ImageCropper\ImageCropper\bin\Debug\net7.0-windows
 C:\Users\b45089\code\winforms\ImageCropper\ImageCropper\bin\Debug\net7.0-windows\ImageCropper.runtimeconfig.json
 C:\Users\b45089\code\winforms\ImageCropper\ImageCropper\bin\Debug\net7.0-windows\ImageCropper.dll
 C:\Users\b45089\code\winforms\ImageCropper\ImageCropper\bin\Debug\net7.0-windows\ImageCropper.pdb
-C:\Users\b45089\code\winforms\ImageCropper\ImageCropper\obj\Debug\net7.0-windows\ImageCropper.FileChooser.resources
 C:\Users\b45089\code\winforms\ImageCropper\ImageCropper\obj\Debug\net7.0-windows\ImageCropper.ImageCropper.resources
 C:\Users\b45089\code\winforms\ImageCropper\ImageCropper\obj\Debug\net7.0-windows\ImageCropper.csproj.GenerateResource.cache
 C:\Users\b45089\code\winforms\ImageCropper\ImageCropper\obj\Debug\net7.0-windows\ImageCropper.GeneratedMSBuildEditorConfig.editorconfig
@@ -32,3 +31,4 @@ C:\Users\b45089\code\winforms\ImageCropper\ImageCropper\obj\Debug\net7.0-windows
 C:\Users\b45089\code\winforms\ImageCropper\ImageCropper\obj\Debug\net7.0-windows\ImageCropper.pdb
 C:\Users\b45089\code\winforms\ImageCropper\ImageCropper\obj\Debug\net7.0-windows\ImageCropper.genruntimeconfig.cache
 C:\Users\b45089\code\winforms\ImageCropper\ImageCropper\obj\Debug\net7.0-windows\ref\ImageCropper.dll
+C:\Users\b45089\code\winforms\ImageCropper\ImageCropper\obj\Debug\net7.0-windows\ImageCropper.Settings.resources

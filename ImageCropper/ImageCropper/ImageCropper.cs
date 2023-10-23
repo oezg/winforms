@@ -21,6 +21,8 @@
             _adjustTrackBar();
         }
 
+        public ImageCropper(Image image) : this(image, new ArdAspectRatio(MediaType.Video)) { }
+
         #endregion
 
         #region properties
