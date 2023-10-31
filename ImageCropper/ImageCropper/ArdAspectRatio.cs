@@ -12,7 +12,7 @@
 
         public int MinimumFactor => MinimumSize.Width / Size.Width;
 
-        public ArdAspectRatio(MediaType mediaType) : base(GetSize(mediaType))
+        public ArdAspectRatio(MediaType mediaType) : base(getSize(mediaType))
         {
             switch (mediaType)
             {
@@ -25,7 +25,7 @@
             }
         }
 
-        public static Size GetSize(MediaType mediaType)
+        private static Size getSize(MediaType mediaType)
         {
             switch (mediaType)
             {
