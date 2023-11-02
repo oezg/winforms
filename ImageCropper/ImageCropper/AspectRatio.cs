@@ -10,7 +10,7 @@ namespace ImageCropper
             try
             {
                 var gcd = GreatestCommonDivisor(size.Width, size.Height);
-                Size = new Size(size.Width / gcd, size.Height / gcd);
+                SimpleSize = new Size(size.Width / gcd, size.Height / gcd);
             }
             catch (ArgumentException)
             {
@@ -18,9 +18,9 @@ namespace ImageCropper
             }
         }
 
-        public Size Size { get; set; }
+        public Size SimpleSize { get; set; }
 
-        public float FloatValue => (float)Size.Width / Size.Height;
+        public float FloatValue => (float)SimpleSize.Width / SimpleSize.Height;
 
         public static int GreatestCommonDivisor(int a, int b)
         {
@@ -43,17 +43,17 @@ namespace ImageCropper
             return a;
         }
 
-        public override string ToString() => $"{Size.Width}:{Size.Height}";
+        public override string ToString() => $"{SimpleSize.Width}:{SimpleSize.Height}";
 
         public override bool Equals(object obj) => obj is AspectRatio aspectRatio && aspectRatio.Equals(this);
 
-        public bool Equals(AspectRatio other) => Size == other.Size;
+        public bool Equals(AspectRatio other) => SimpleSize == other.SimpleSize;
 
         public override int GetHashCode()
         {
             int hashCode = 859600377;
-            hashCode = hashCode * -1521134295 + Size.Width.GetHashCode();
-            hashCode = hashCode * -1521134295 + Size.Height.GetHashCode();
+            hashCode = hashCode * -1521134295 + SimpleSize.Width.GetHashCode();
+            hashCode = hashCode * -1521134295 + SimpleSize.Height.GetHashCode();
             return hashCode;
         }
 
@@ -69,18 +69,11 @@ namespace ImageCropper
 
         public static bool operator >=(AspectRatio left, AspectRatio right) => !(left < right);
 
-        public static Size operator *(int left, AspectRatio right)
-        {
-            if (left <= 0)
-            {
-                throw new ArgumentException("The multiplier must be positive");
-            }
-            return new Size(left * right.Size.Width, left * right.Size.Height);
-        }
+        public static Size operator *(int left, AspectRatio right) 
+            => left > 0
+                ? new Size(left * right.SimpleSize.Width, left * right.SimpleSize.Height)
+                : throw new ArgumentException("The multiplier must be positive");
 
-        public static Size operator *(AspectRatio left, int right)
-        {
-            return right * left;
-        }
+        public static Size operator *(AspectRatio left, int right) => right * left;
     }
 }

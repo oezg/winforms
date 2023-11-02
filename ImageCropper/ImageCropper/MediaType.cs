@@ -3,6 +3,6 @@
     public enum MediaType
     {
         Audio,
-        Video,
+        Video
     }
 }

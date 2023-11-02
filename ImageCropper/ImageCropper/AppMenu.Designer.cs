@@ -71,13 +71,15 @@
             pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox.TabIndex = 1;
             pictureBox.TabStop = false;
+            pictureBox.SizeChanged += pictureBox_SizeChanged;
+            pictureBox.Click += pictureBox_Click;
             // 
             // buttonCrop
             // 
-            buttonCrop.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            buttonCrop.Location = new Point(443, 378);
+            buttonCrop.Enabled = false;
+            buttonCrop.Location = new Point(358, 189);
             buttonCrop.Name = "buttonCrop";
-            buttonCrop.Size = new Size(124, 23);
+            buttonCrop.Size = new Size(79, 23);
             buttonCrop.TabIndex = 2;
             buttonCrop.Text = "Crop";
             buttonCrop.UseVisualStyleBackColor = true;
@@ -93,8 +95,8 @@
             // 
             // buttonSave
             // 
-            buttonSave.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            buttonSave.Location = new Point(731, 378);
+            buttonSave.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            buttonSave.Location = new Point(443, 378);
             buttonSave.Name = "buttonSave";
             buttonSave.Size = new Size(75, 23);
             buttonSave.TabIndex = 4;
@@ -198,6 +200,8 @@
             trackBarQuality.Name = "trackBarQuality";
             trackBarQuality.Size = new Size(426, 45);
             trackBarQuality.TabIndex = 11;
+            trackBarQuality.TickFrequency = 5;
+            trackBarQuality.TickStyle = TickStyle.TopLeft;
             trackBarQuality.Value = 75;
             trackBarQuality.Scroll += trackBarQuality_Scroll;
             // 

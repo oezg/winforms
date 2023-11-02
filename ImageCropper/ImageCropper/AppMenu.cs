@@ -1,15 +1,26 @@
 using System.Drawing.Imaging;
-using System.Linq;
-using static System.Windows.Forms.DataFormats;
 
 namespace ImageCropper
 {
     public partial class AppMenu : Form
     {
+        private static readonly ArdAspectRatio s_ardAspectRatioAudio;
+        private static readonly ArdAspectRatio s_ardAspectRatioVideo;
+
+        private readonly ArdAspectRatio _selectedArdAspectRatio;
+
+        static AppMenu()
+        {
+            s_ardAspectRatioAudio = new ArdAspectRatio(MediaType.Audio);
+            s_ardAspectRatioVideo = new ArdAspectRatio(MediaType.Video);
+        }
+
         public AppMenu()
         {
             InitializeComponent();
-
+            _selectedArdAspectRatio = radioButtonAudio.Checked
+                ? s_ardAspectRatioAudio
+                : s_ardAspectRatioVideo;
         }
 
         private void buttonBrowse_Click(object sender, EventArgs e)
@@ -20,26 +31,25 @@ namespace ImageCropper
                 Image image = Image.FromFile(textBoxFile.Text);
                 pictureBox.Height = pictureBox.Width * image.Height / image.Width;
                 pictureBox.Image = image;
-                adjustSizePictureBoxAndForm(image.Size);
+                adjustPictureBoxSize(image.Size);
+                updateButtonCrop(image.Size);
             }
         }
 
-        // the height of the window is changed as much as the adjustment in height to the picture box
-        private void adjustSizePictureBoxAndForm(Size size)
-        {
-            pictureBox.Height = pictureBox.Width * size.Height / size.Width;
-            this.Height = pictureBox.Bottom + 80;
-        }
+        private void updateButtonCrop(Size size)
+            => buttonCrop.Enabled = !(size < _selectedArdAspectRatio);
+
+        private void adjustPictureBoxSize(Size size)
+            => pictureBox.Height = pictureBox.Width * size.Height / size.Width;
 
         private void buttonCrop_Click(object sender, EventArgs e)
         {
-            ImageCropper imageCropper = new(
-                pictureBox.Image,
-                new ArdAspectRatio(radioButtonAudio.Checked ? MediaType.Audio : MediaType.Video));
+            ImageCropper imageCropper = new(pictureBox.Image, _selectedArdAspectRatio);
 
             if (imageCropper.ShowDialog() == DialogResult.OK)
             {
                 pictureBox.Image = imageCropper.CroppedImage;
+                pictureBox.Size = imageCropper.CropRectangle.Size;
             }
         }
 
@@ -55,14 +65,15 @@ namespace ImageCropper
                 pictureBox.Image.Save(croppedFilename, ImageFormat.Jpeg);
 
             }
+
             else
             {
                 using EncoderParameters myEncoderParameters = new(1);
 
                 myEncoderParameters.Param[0] = new EncoderParameter(Encoder.Quality, trackBarQuality.Value);
 
-                var jpgEncoder = ImageCodecInfo.GetImageEncoders().First(codec => codec.FormatID == ImageFormat.Jpeg.Guid); 
-                
+                var jpgEncoder = ImageCodecInfo.GetImageEncoders().First(codec => codec.FormatID == ImageFormat.Jpeg.Guid);
+
                 pictureBox.Image.Save(croppedFilename, jpgEncoder, myEncoderParameters);
             }
         }
@@ -80,10 +91,24 @@ namespace ImageCropper
             updateLabelQualityText();
         }
 
-        private void updateLabelQualityText() 
+        private void updateLabelQualityText()
             => labelQuality.Text = labelQuality.Enabled ? $"Quality Level: {trackBarQuality.Value}" : string.Empty;
 
-        private void trackBarQuality_Scroll(object sender, EventArgs e) 
+        private void trackBarQuality_Scroll(object sender, EventArgs e)
             => updateLabelQualityText();
+
+        private void pictureBox_SizeChanged(object sender, EventArgs e)
+        {
+            Height = pictureBox.Bottom + 80;
+            Width = pictureBox.Right + 30;
+        }
+
+        private void pictureBox_Click(object sender, EventArgs e)
+        {
+            if (buttonCrop.Enabled)
+            {
+                buttonCrop_Click(sender, e);
+            }
+        }
     }
 }

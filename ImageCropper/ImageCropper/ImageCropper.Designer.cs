@@ -32,6 +32,7 @@
             buttonOK = new Button();
             buttonCancel = new Button();
             trackBar = new TrackBar();
+            labelFactor = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox).BeginInit();
             ((System.ComponentModel.ISupportInitialize)trackBar).BeginInit();
             SuspendLayout();
@@ -52,9 +53,9 @@
             // buttonOK
             // 
             buttonOK.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            buttonOK.Location = new Point(386, 488);
+            buttonOK.Location = new Point(468, 499);
             buttonOK.Name = "buttonOK";
-            buttonOK.Size = new Size(131, 23);
+            buttonOK.Size = new Size(105, 23);
             buttonOK.TabIndex = 2;
             buttonOK.Text = "OK";
             buttonOK.UseVisualStyleBackColor = true;
@@ -63,9 +64,9 @@
             // buttonCancel
             // 
             buttonCancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            buttonCancel.Location = new Point(552, 488);
+            buttonCancel.Location = new Point(579, 499);
             buttonCancel.Name = "buttonCancel";
-            buttonCancel.Size = new Size(132, 23);
+            buttonCancel.Size = new Size(105, 23);
             buttonCancel.TabIndex = 3;
             buttonCancel.Text = "Cancel";
             buttonCancel.UseVisualStyleBackColor = true;
@@ -80,9 +81,20 @@
             trackBar.Name = "trackBar";
             trackBar.Size = new Size(368, 45);
             trackBar.TabIndex = 4;
-            trackBar.TickFrequency = 10;
+            trackBar.TickFrequency = 5;
+            trackBar.TickStyle = TickStyle.TopLeft;
             trackBar.Value = 80;
             trackBar.Scroll += trackBar_Scroll;
+            // 
+            // labelFactor
+            // 
+            labelFactor.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            labelFactor.AutoSize = true;
+            labelFactor.Location = new Point(386, 477);
+            labelFactor.Name = "labelFactor";
+            labelFactor.Size = new Size(48, 45);
+            labelFactor.TabIndex = 5;
+            labelFactor.Text = "Minim: \r\nFactor: \r\nMaxim:";
             // 
             // ImageCropper
             // 
@@ -91,6 +103,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             CancelButton = buttonCancel;
             ClientSize = new Size(696, 534);
+            Controls.Add(labelFactor);
             Controls.Add(trackBar);
             Controls.Add(buttonCancel);
             Controls.Add(buttonOK);
@@ -109,5 +122,6 @@
         private Button buttonOK;
         private Button buttonCancel;
         private TrackBar trackBar;
+        private Label labelFactor;
     }
 }

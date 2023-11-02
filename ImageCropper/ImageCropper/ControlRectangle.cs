@@ -3,68 +3,58 @@
     internal class ControlRectangle
     {
         private readonly Size _displaySize;
-        private readonly Size _imageSize;
-        private int _factorImage;
-        public Rectangle RectangleInDisplay;
+        private readonly Size _sourceSize;
+        private int _factorSource;
+        public Rectangle RectangleDisplay;
 
-        public ControlRectangle(Size displaySize, Size imageSize, ArdAspectRatio ardAspectRatio)
+        public ControlRectangle(Size displaySize, Size sourceSize, ArdAspectRatio ardAspectRatio)
         {
             _displaySize = displaySize;
-            _imageSize = imageSize;
+            _sourceSize = sourceSize;
             ArdAspectRatio = ardAspectRatio;
-            FactorImage = MaxFactorImage;
-            RectangleInDisplay = new Rectangle(new Point(), SizeInDisplay);
+            FactorSource = Math.Min(ArdAspectRatio.MaximumFactor, maxFactor(_sourceSize));
+            RectangleDisplay = new Rectangle(new Point(), SizeDisplay);
         }
 
         public ArdAspectRatio ArdAspectRatio { get; }
 
-        public int FactorDisplay => FactorImage * MaxFactorDisplay / MaxFactorImage;
-
-        public int FactorImage
+        public int FactorSource
         {
-            get => _factorImage;
+            get => _factorSource;
             set
             {
-                _factorImage = value;
-                RectangleInDisplay.Size = SizeInDisplay;
+                _factorSource = value;
+                RectangleDisplay.Size = SizeDisplay;
             }
         }
 
-        public int MaxFactorDisplay
-            //=> Math.Min(_displaySize.Width / ArdAspectRatio.Size.Width, _displaySize.Height / ArdAspectRatio.Size.Height);
-            => _maxFactor(_displaySize);
+        public Rectangle RectangleSource 
+            => new(LocationDisplay, SizeSource);
 
-        public int MaxFactorImage
-            //=> Math.Min(_imageSize.Width / ArdAspectRatio.Size.Width, _imageSize.Height / ArdAspectRatio.Size.Height);
-            => _maxFactor(_imageSize);
+        public Point LocationDisplay
+            => new(Math.Min(projectToSource(RectangleDisplay.X), _sourceSize.Width - SizeSource.Width),
+                    Math.Min(projectToSource(RectangleDisplay.Y), _sourceSize.Height - SizeSource.Height));
 
-        //public int MinFactorImage 
-        //    =>  ImageCropper.MinimumWidthPixel / AspectRatio.Width;
+        public Size SizeDisplay
+            => ArdAspectRatio * (FactorSource * _displaySize.Width / _sourceSize.Width);
 
-        public Rectangle RectangleInImage 
-            => new(LocationInImage, SizeInImage);
+        public Size SizeSource
+            => ArdAspectRatio * FactorSource;
 
-        public Point LocationInImage
-            => new( Math.Min(RectangleInDisplay.X * MaxFactorImage / MaxFactorDisplay, _imageSize.Width - SizeInImage.Width),
-                    Math.Min(RectangleInDisplay.Y * MaxFactorImage / MaxFactorDisplay, _imageSize.Height - SizeInImage.Height) );
-        
-        public Size SizeInDisplay
-            => ArdAspectRatio * FactorDisplay;
-
-        public Size SizeInImage
-            => ArdAspectRatio * FactorImage;
-
-        public bool PermitTrackbarValue(int value)
+        public bool IsValidFactor(int factor)
         {
-            Rectangle rectangle = new(LocationInImage, ArdAspectRatio * value);
-            return rectangle.Right <= _imageSize.Width && rectangle.Bottom <= _imageSize.Height;
+            if (factor > ArdAspectRatio.MaximumFactor || factor < ArdAspectRatio.MinimumFactor)
+            {
+                return false;
+            }
+            Rectangle rectangle = new(LocationDisplay, ArdAspectRatio * factor);
+            return rectangle.Right <= _sourceSize.Width && rectangle.Bottom <= _sourceSize.Height;
         }
 
-        //private Point _initialLocationRectangleDisplay()
-        //    => new( (_displaySize.Width - SizeInDisplay.Width) / 2,
-        //            (_displaySize.Height - SizeInDisplay.Height) / 2 );
+        private int projectToSource(int distanceDisplay) 
+            => distanceDisplay * _sourceSize.Width / _displaySize.Width;
 
-        private int _maxFactor(Size size)
-            => Math.Min(size.Width / ArdAspectRatio.Size.Width, size.Height / ArdAspectRatio.Size.Height);
+        private int maxFactor(Size size)
+            => Math.Min(size.Width / ArdAspectRatio.SimpleSize.Width, size.Height / ArdAspectRatio.SimpleSize.Height);
     }
 }

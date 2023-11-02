@@ -3,56 +3,61 @@
     public partial class ImageCropper : Form
     {
         #region fields
-        
+
         private Point _pointMouseDown;
         private bool _isMouseDown;
         private readonly ControlRectangle _controlRectangle;
-        
+
         #endregion
 
         #region constructors
-        
+
         public ImageCropper(Image image, ArdAspectRatio ardAspectRatio)
         {
             InitializeComponent();
-            _adjustSizePictureBoxAndForm(image.Size);
+            adjustHeightPictureBoxAndForm(image.Size);
             pictureBox.Image = image;
             _controlRectangle = new ControlRectangle(pictureBox.Size, image.Size, ardAspectRatio);
-            _adjustTrackBar();
+            initializeTrackBar();
+            updateLabelFactor();
         }
 
         #endregion
 
         #region properties
-        
+
         public Image CroppedImage => new Bitmap(pictureBox.Image)
-            .Clone(_controlRectangle.RectangleInImage, 
+            .Clone(_controlRectangle.RectangleSource,
             pictureBox.Image.PixelFormat);
+
+        public Rectangle CropRectangle => _controlRectangle.RectangleDisplay;
 
         #endregion
 
         #region methods
 
-        // the height of the image cropper window is changed as much as the adjustment in height to the picture box
-        private void _adjustSizePictureBoxAndForm(Size size)
+        // picture box gets same aspect ratio as the source image
+        private void adjustHeightPictureBoxAndForm(Size size)
         {
             int newPictureBoxHeight = pictureBox.Width * size.Height / size.Width;
             this.Height += newPictureBoxHeight - pictureBox.Height;
             pictureBox.Height = newPictureBoxHeight;
         }
 
-        public void _adjustTrackBar()
+        private void initializeTrackBar()
         {
-            trackBar.Maximum = _controlRectangle.MaxFactorImage;
+            trackBar.Maximum = _controlRectangle.FactorSource;
             trackBar.Minimum = _controlRectangle.ArdAspectRatio.MinimumFactor;
-            trackBar.TickFrequency = trackBar.Maximum - trackBar.Minimum;
             trackBar.Value = trackBar.Maximum;
         }
-        
+
+        private void updateLabelFactor()
+            => labelFactor.Text = $"Minim: {trackBar.Minimum}\nFactor: {trackBar.Value}\nMaxim: {trackBar.Maximum}";
+
         #endregion
 
         #region event handlers
-        
+
         private void buttonOK_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.OK;
@@ -66,7 +71,7 @@
         }
 
         private void pictureBox_Paint(object sender, PaintEventArgs e)
-            => e.Graphics.DrawRectangle(new Pen(Color.Red, 2), _controlRectangle.RectangleInDisplay);
+            => e.Graphics.DrawRectangle(new Pen(Color.Red, 2), _controlRectangle.RectangleDisplay);
 
         private void pictureBox_MouseUp(object sender, MouseEventArgs e)
             => _isMouseDown = false;
@@ -75,25 +80,25 @@
         {
             if (_isMouseDown)
             {
-                _controlRectangle.RectangleInDisplay.X += e.X - _pointMouseDown.X;
-                _controlRectangle.RectangleInDisplay.Y += e.Y - _pointMouseDown.Y;
+                _controlRectangle.RectangleDisplay.X += e.X - _pointMouseDown.X;
+                _controlRectangle.RectangleDisplay.Y += e.Y - _pointMouseDown.Y;
                 _pointMouseDown = e.Location;
 
-                if (_controlRectangle.RectangleInDisplay.Right > pictureBox.Width)
+                if (_controlRectangle.RectangleDisplay.Right > pictureBox.Width)
                 {
-                    _controlRectangle.RectangleInDisplay.X = pictureBox.Width - _controlRectangle.RectangleInDisplay.Width;
+                    _controlRectangle.RectangleDisplay.X = pictureBox.Width - _controlRectangle.RectangleDisplay.Width;
                 }
-                if (_controlRectangle.RectangleInDisplay.Top < 0)
+                if (_controlRectangle.RectangleDisplay.Top < 0)
                 {
-                    _controlRectangle.RectangleInDisplay.Y = 0;
+                    _controlRectangle.RectangleDisplay.Y = 0;
                 }
-                if (_controlRectangle.RectangleInDisplay.Left < 0)
+                if (_controlRectangle.RectangleDisplay.Left < 0)
                 {
-                    _controlRectangle.RectangleInDisplay.X = 0;
+                    _controlRectangle.RectangleDisplay.X = 0;
                 }
-                if (_controlRectangle.RectangleInDisplay.Bottom > pictureBox.Height)
+                if (_controlRectangle.RectangleDisplay.Bottom > pictureBox.Height)
                 {
-                    _controlRectangle.RectangleInDisplay.Y = pictureBox.Height - _controlRectangle.RectangleInDisplay.Height;
+                    _controlRectangle.RectangleDisplay.Y = pictureBox.Height - _controlRectangle.RectangleDisplay.Height;
                 }
                 Refresh();
             }
@@ -107,39 +112,19 @@
 
         private void trackBar_Scroll(object sender, EventArgs e)
         {
-            if (_controlRectangle.PermitTrackbarValue(trackBar.Value))
+            if (_controlRectangle.IsValidFactor(trackBar.Value))
             {
-                _controlRectangle.FactorImage = trackBar.Value;
+                _controlRectangle.FactorSource = trackBar.Value;
                 Refresh();
             }
             else
             {
-                trackBar.Value = _controlRectangle.FactorImage;
+                trackBar.Value = _controlRectangle.FactorSource;
             }
+
+            updateLabelFactor();
         }
-        
+
         #endregion
-
-        //#region structs
-        //public readonly struct AspectRatio
-        //{
-        //    public AspectRatio(int width, int height)
-        //    {
-        //        Width = width;
-        //        Height = height;
-        //    }
-
-        //    public int Width { get; }
-
-        //    public int Height { get; }
-
-        //    public readonly float FloatValue => (float)Width / Height;
-
-        //    public readonly Size UnitSize => new(Width, Height);
-
-        //    public Size SizeBy(int factor)
-        //        => new(Width * factor, Height * factor);
-        //}
-        //#endregion
     }
 }
