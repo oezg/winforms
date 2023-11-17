@@ -99,7 +99,7 @@ namespace ImageCropper
 
         private void pictureBox_SizeChanged(object sender, EventArgs e)
         {
-            Height = pictureBox.Bottom + 80;
+            Height = pictureBox.Bottom + 100;
             Width = pictureBox.Right + 30;
         }
 

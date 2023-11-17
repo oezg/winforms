@@ -51,9 +51,10 @@
             // 
             // buttonBrowse
             // 
-            buttonBrowse.Location = new Point(384, 12);
+            buttonBrowse.Location = new Point(430, 16);
+            buttonBrowse.Margin = new Padding(3, 4, 3, 4);
             buttonBrowse.Name = "buttonBrowse";
-            buttonBrowse.Size = new Size(54, 23);
+            buttonBrowse.Size = new Size(71, 31);
             buttonBrowse.TabIndex = 0;
             buttonBrowse.Text = "Browse";
             buttonBrowse.UseVisualStyleBackColor = true;
@@ -65,9 +66,10 @@
             // 
             // pictureBox
             // 
-            pictureBox.Location = new Point(443, 12);
+            pictureBox.Location = new Point(506, 16);
+            pictureBox.Margin = new Padding(3, 4, 3, 4);
             pictureBox.Name = "pictureBox";
-            pictureBox.Size = new Size(640, 360);
+            pictureBox.Size = new Size(731, 480);
             pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox.TabIndex = 1;
             pictureBox.TabStop = false;
@@ -77,9 +79,10 @@
             // buttonCrop
             // 
             buttonCrop.Enabled = false;
-            buttonCrop.Location = new Point(358, 189);
+            buttonCrop.Location = new Point(409, 252);
+            buttonCrop.Margin = new Padding(3, 4, 3, 4);
             buttonCrop.Name = "buttonCrop";
-            buttonCrop.Size = new Size(79, 23);
+            buttonCrop.Size = new Size(90, 31);
             buttonCrop.TabIndex = 2;
             buttonCrop.Text = "Crop";
             buttonCrop.UseVisualStyleBackColor = true;
@@ -87,18 +90,20 @@
             // 
             // textBoxFile
             // 
-            textBoxFile.Location = new Point(12, 12);
+            textBoxFile.Location = new Point(14, 16);
+            textBoxFile.Margin = new Padding(3, 4, 3, 4);
             textBoxFile.Name = "textBoxFile";
-            textBoxFile.Size = new Size(366, 23);
+            textBoxFile.Size = new Size(410, 27);
             textBoxFile.TabIndex = 3;
             textBoxFile.Text = "Enter path to image or browse";
             // 
             // buttonSave
             // 
             buttonSave.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            buttonSave.Location = new Point(443, 378);
+            buttonSave.Location = new Point(506, 504);
+            buttonSave.Margin = new Padding(3, 4, 3, 4);
             buttonSave.Name = "buttonSave";
-            buttonSave.Size = new Size(75, 23);
+            buttonSave.Size = new Size(86, 31);
             buttonSave.TabIndex = 4;
             buttonSave.Text = "Save";
             buttonSave.UseVisualStyleBackColor = true;
@@ -107,9 +112,10 @@
             // buttonClose
             // 
             buttonClose.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            buttonClose.Location = new Point(1008, 378);
+            buttonClose.Location = new Point(1152, 504);
+            buttonClose.Margin = new Padding(3, 4, 3, 4);
             buttonClose.Name = "buttonClose";
-            buttonClose.Size = new Size(75, 23);
+            buttonClose.Size = new Size(86, 31);
             buttonClose.TabIndex = 5;
             buttonClose.Text = "Close";
             buttonClose.UseVisualStyleBackColor = true;
@@ -118,9 +124,10 @@
             // radioButtonAudio
             // 
             radioButtonAudio.AutoSize = true;
-            radioButtonAudio.Location = new Point(155, 13);
+            radioButtonAudio.Location = new Point(177, 17);
+            radioButtonAudio.Margin = new Padding(3, 4, 3, 4);
             radioButtonAudio.Name = "radioButtonAudio";
-            radioButtonAudio.Size = new Size(57, 19);
+            radioButtonAudio.Size = new Size(70, 24);
             radioButtonAudio.TabIndex = 7;
             radioButtonAudio.Text = "Audio";
             radioButtonAudio.UseVisualStyleBackColor = true;
@@ -129,9 +136,10 @@
             // 
             radioButtonVideo.AutoSize = true;
             radioButtonVideo.Checked = true;
-            radioButtonVideo.Location = new Point(262, 13);
+            radioButtonVideo.Location = new Point(299, 17);
+            radioButtonVideo.Margin = new Padding(3, 4, 3, 4);
             radioButtonVideo.Name = "radioButtonVideo";
-            radioButtonVideo.Size = new Size(55, 19);
+            radioButtonVideo.Size = new Size(69, 24);
             radioButtonVideo.TabIndex = 8;
             radioButtonVideo.TabStop = true;
             radioButtonVideo.Text = "Video";
@@ -141,9 +149,11 @@
             // 
             groupBoxMediaType.Controls.Add(radioButtonAudio);
             groupBoxMediaType.Controls.Add(radioButtonVideo);
-            groupBoxMediaType.Location = new Point(12, 41);
+            groupBoxMediaType.Location = new Point(14, 55);
+            groupBoxMediaType.Margin = new Padding(3, 4, 3, 4);
             groupBoxMediaType.Name = "groupBoxMediaType";
-            groupBoxMediaType.Size = new Size(426, 39);
+            groupBoxMediaType.Padding = new Padding(3, 4, 3, 4);
+            groupBoxMediaType.Size = new Size(487, 52);
             groupBoxMediaType.TabIndex = 9;
             groupBoxMediaType.TabStop = false;
             groupBoxMediaType.Text = "Select Media Type:";
@@ -153,9 +163,11 @@
             groupBoxQuality.Controls.Add(labelQuality);
             groupBoxQuality.Controls.Add(radioButtonDefault);
             groupBoxQuality.Controls.Add(radioButtonManual);
-            groupBoxQuality.Location = new Point(12, 86);
+            groupBoxQuality.Location = new Point(14, 115);
+            groupBoxQuality.Margin = new Padding(3, 4, 3, 4);
             groupBoxQuality.Name = "groupBoxQuality";
-            groupBoxQuality.Size = new Size(426, 46);
+            groupBoxQuality.Padding = new Padding(3, 4, 3, 4);
+            groupBoxQuality.Size = new Size(487, 61);
             groupBoxQuality.TabIndex = 10;
             groupBoxQuality.TabStop = false;
             groupBoxQuality.Text = "Set Quality Level At Saving";
@@ -164,18 +176,19 @@
             // 
             labelQuality.AutoSize = true;
             labelQuality.Enabled = false;
-            labelQuality.Location = new Point(9, 27);
+            labelQuality.Location = new Point(10, 36);
             labelQuality.Name = "labelQuality";
-            labelQuality.Size = new Size(0, 15);
+            labelQuality.Size = new Size(0, 20);
             labelQuality.TabIndex = 2;
             // 
             // radioButtonDefault
             // 
             radioButtonDefault.AutoSize = true;
             radioButtonDefault.Checked = true;
-            radioButtonDefault.Location = new Point(262, 16);
+            radioButtonDefault.Location = new Point(299, 21);
+            radioButtonDefault.Margin = new Padding(3, 4, 3, 4);
             radioButtonDefault.Name = "radioButtonDefault";
-            radioButtonDefault.Size = new Size(63, 19);
+            radioButtonDefault.Size = new Size(79, 24);
             radioButtonDefault.TabIndex = 1;
             radioButtonDefault.TabStop = true;
             radioButtonDefault.Text = "Default";
@@ -184,9 +197,10 @@
             // radioButtonManual
             // 
             radioButtonManual.AutoSize = true;
-            radioButtonManual.Location = new Point(155, 16);
+            radioButtonManual.Location = new Point(177, 21);
+            radioButtonManual.Margin = new Padding(3, 4, 3, 4);
             radioButtonManual.Name = "radioButtonManual";
-            radioButtonManual.Size = new Size(65, 19);
+            radioButtonManual.Size = new Size(79, 24);
             radioButtonManual.TabIndex = 0;
             radioButtonManual.Text = "Manual";
             radioButtonManual.UseVisualStyleBackColor = true;
@@ -195,10 +209,11 @@
             // trackBarQuality
             // 
             trackBarQuality.Enabled = false;
-            trackBarQuality.Location = new Point(12, 138);
+            trackBarQuality.Location = new Point(14, 184);
+            trackBarQuality.Margin = new Padding(3, 4, 3, 4);
             trackBarQuality.Maximum = 100;
             trackBarQuality.Name = "trackBarQuality";
-            trackBarQuality.Size = new Size(426, 45);
+            trackBarQuality.Size = new Size(487, 56);
             trackBarQuality.TabIndex = 11;
             trackBarQuality.TickFrequency = 5;
             trackBarQuality.TickStyle = TickStyle.TopLeft;
@@ -208,10 +223,10 @@
             // AppMenu
             // 
             AcceptButton = buttonCrop;
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             CancelButton = buttonClose;
-            ClientSize = new Size(1095, 413);
+            ClientSize = new Size(1251, 551);
             Controls.Add(trackBarQuality);
             Controls.Add(groupBoxQuality);
             Controls.Add(groupBoxMediaType);
@@ -221,6 +236,7 @@
             Controls.Add(buttonCrop);
             Controls.Add(pictureBox);
             Controls.Add(buttonBrowse);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "AppMenu";
             Text = "AppMenu";
             ((System.ComponentModel.ISupportInitialize)pictureBox).EndInit();
