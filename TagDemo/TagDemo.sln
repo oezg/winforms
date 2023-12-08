@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34302.85
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TagDemo", "TagDemo\TagDemo.csproj", "{F616C089-120E-49C2-AF47-2283E7568D39}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F616C089-120E-49C2-AF47-2283E7568D39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F616C089-120E-49C2-AF47-2283E7568D39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F616C089-120E-49C2-AF47-2283E7568D39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F616C089-120E-49C2-AF47-2283E7568D39}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ED61A808-0F9A-4E48-B97A-9BA501361E17}
+	EndGlobalSection
+EndGlobal
