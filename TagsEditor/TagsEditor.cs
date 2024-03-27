@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
@@ -16,19 +17,19 @@ namespace TagsEditor
         public TagsEditor()
         {
             InitializeComponent();
-            
+
             textBox.AutoCompleteCustomSource.AddRange(s_tags);
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             string tagToAdd = textBox.Text.Trim();
-            
+
             if (string.IsNullOrEmpty(tagToAdd))
             {
                 return;
             }
-            
+
             if (listBox.Items.Contains(tagToAdd))
             {
                 return;
@@ -45,9 +46,12 @@ namespace TagsEditor
         private void buttonApply_Click(object sender, EventArgs e)
         {
             var tags = s_tags.AsEnumerable();
+            //var x = new HashSet<string>(tags);
+            ////x.UnionWith((IEnumerable<string>)listBox.Items);
 
             foreach (string item in listBox.Items)
             {
+                //x.Add(item);
                 if (tags.Contains(item))
                 {
                     continue;
@@ -57,8 +61,9 @@ namespace TagsEditor
             }
 
             tags = tags.OrderBy(tag => tag);
+            //x.OrderBy(t => t);
 
-            string tagsText = string.Join("|", tags);
+            string tagsText = string.Join("\n", tags);
 
             File.WriteAllText(s_outputFile, tagsText);
         }

@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F616C089-120E-49C2-AF47-2283E7568D39}</ProjectGuid>
+    <ProjectGuid>{9913A981-0134-4132-BE71-0D1BB46A353D}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>TagDemo</RootNamespace>
-    <AssemblyName>TagDemo</AssemblyName>
+    <RootNamespace>TagsEditor</RootNamespace>
+    <AssemblyName>TagsEditor</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -46,11 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="TagsEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="TagsEditor.Designer.cs">
+      <DependentUpon>TagsEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
