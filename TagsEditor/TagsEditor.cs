@@ -18,29 +18,29 @@ namespace TagsEditor
         {
             InitializeComponent();
 
-            textBox.AutoCompleteCustomSource.AddRange(s_tags);
+            tagToAdd.AutoCompleteCustomSource.AddRange(s_tags);
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            string tagToAdd = textBox.Text.Trim();
+            string tagToAdd = this.tagToAdd.Text.Trim();
 
             if (string.IsNullOrEmpty(tagToAdd))
             {
                 return;
             }
 
-            if (listBox.Items.Contains(tagToAdd))
+            if (listToAdd.Items.Contains(tagToAdd))
             {
                 return;
             }
 
-            listBox.Items.Add(tagToAdd);
+            listToAdd.Items.Add(tagToAdd);
         }
 
         private void buttonRemove_Click(object sender, EventArgs e)
         {
-            listBox.Items.Remove(listBox.SelectedItem);
+            listToAdd.Items.Remove(listToAdd.SelectedItem);
         }
 
         private void buttonApply_Click(object sender, EventArgs e)
@@ -49,7 +49,7 @@ namespace TagsEditor
             //var x = new HashSet<string>(tags);
             ////x.UnionWith((IEnumerable<string>)listBox.Items);
 
-            foreach (string item in listBox.Items)
+            foreach (string item in listToAdd.Items)
             {
                 //x.Add(item);
                 if (tags.Contains(item))
